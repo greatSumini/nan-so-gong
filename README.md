@@ -9,9 +9,9 @@
 ### 1. 저장소를 기기에 Clone합니다.
 
 ```shell
-$ git clone https://github.com/firstep-dev/firstep-web.git
+$ git clone https://github.com/greatSumini/nan-so-gong.git
 
-$ cd firstep-web
+$ cd nan-so-gong
 ```
 
 ### 2. 의존성 설치
