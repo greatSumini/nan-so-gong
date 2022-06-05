@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { rem } from "@/helpers";
 
 type InputProps = {
-  label: string;
+  label?: string;
   /** @default '100%'' */
   width?: number | string;
 
@@ -18,7 +18,7 @@ export function Input(props: InputProps) {
 
   return (
     <Wrapper>
-      <LabelText>{label}</LabelText>
+      {label != null && <LabelText>{label}</LabelText>}
       <StyledInput {...inputProps} />
     </Wrapper>
   );
