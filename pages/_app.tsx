@@ -5,7 +5,11 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { colors } from "@/constants";
 
 const GlobalStyle = createGlobalStyle`
-  @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+  * {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  }
 
   html, body {
     width: 100vw;
@@ -21,11 +25,6 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
   }
-
-  * {
-    box-sizing: border-box;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  }
 `;
 
 const theme = {
@@ -39,6 +38,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <link
+          rel="import"
+          href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
         />
       </Head>
       <GlobalStyle />
