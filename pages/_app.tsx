@@ -13,7 +13,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
 
+    font-size: 10px;
+
     background-color: ${colors.gray9};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   * {
