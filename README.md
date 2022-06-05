@@ -30,6 +30,6 @@ $ yarn install
 # 개발 서버 실행
 $ yarn dev
 
-# 빌드 (lint, 타입체크를 포함합니다.)
-$ yarn build
+# 검사 (lint, 타입체크를 포함합니다.)
+$ yarn run check
 ```
