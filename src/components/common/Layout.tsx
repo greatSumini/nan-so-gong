@@ -1,21 +1,37 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
+import { rem } from "@/helpers";
+
 type LayoutProps = {
+  /** @default 640 */
+  width?: number | string;
+  /** @default 480 */
+  height?: number | string;
+
   children: ReactNode;
 };
 
-export function Layout({ children }: LayoutProps) {
-  return <Wrapper>{children}</Wrapper>;
+export function Layout(props: LayoutProps) {
+  const propsWithDefault: Required<LayoutProps> = {
+    width: 640,
+    height: 480,
+    ...props,
+  };
+
+  return <Wrapper {...propsWithDefault} />;
 }
 
-const Wrapper = styled.main`
+const Wrapper = styled.main<{
+  width: number | string;
+  height: number | string;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 64rem;
-  height: 48rem;
+  width: ${(props) => rem(props.width)};
+  height: ${(props) => rem(props.height)};
   padding: 3.2rem 2.4rem;
   border-radius: 0.4rem;
 
