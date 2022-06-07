@@ -16,7 +16,9 @@ export default function HomePage() {
         <Button href="/signup" width={288}>
           지갑 생성
         </Button>
-        <Button width={288}>지갑 가져오기</Button>
+        <Button href="/recovery" width={288}>
+          지갑 가져오기
+        </Button>
       </Row>
     </Layout>
   );

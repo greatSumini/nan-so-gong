@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -10,6 +10,7 @@ type ButtonProps = {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
+  style?: CSSProperties;
 };
 
 export function Button({ href, ...props }: ButtonProps) {
