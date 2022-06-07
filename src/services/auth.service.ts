@@ -14,10 +14,16 @@ class AuthService {
   }
 
   recovery(phrase: string, newPassword: string) {
-    const index = accounts.findIndex((v) => v.phrase === phrase);
-    if (index < 0) {
-      throw new Error("일치하는 계정이 없습니다.");
+    // const index = accounts.findIndex((v) => v.phrase === phrase);
+    // if (index < 0) {
+    //   throw new Error("일치하는 계정이 없습니다.");
+    // }
+
+    if (accounts.length === 0) {
+      throw new Error("생성된 계정이 없습니다.");
     }
+
+    const index = 0;
 
     const account = accounts[index];
     accounts = [
