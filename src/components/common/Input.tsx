@@ -8,6 +8,7 @@ type InputProps = {
   /** @default '100%'' */
   width?: number | string;
 
+  className?: string;
   type?: HTMLInputTypeAttribute;
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;

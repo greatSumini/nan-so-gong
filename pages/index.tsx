@@ -13,7 +13,9 @@ export default function HomePage() {
         편리한 거래 환경을 제공합니다
       </Description>
       <Row>
-        <Button width={288}>지갑 생성</Button>
+        <Button href="/signup" width={288}>
+          지갑 생성
+        </Button>
         <Button width={288}>지갑 가져오기</Button>
       </Row>
     </Layout>
