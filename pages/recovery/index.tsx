@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import { Layout, Button, Input } from "@/components/common";
 
+import { AuthService } from "@/services";
+
 export default function RecoveryPage() {
   const [phrase, setPhrase] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +24,7 @@ export default function RecoveryPage() {
       return;
     }
 
+    AuthService.recovery(phrase, password);
     router.replace("/recovery/complete");
   };
 

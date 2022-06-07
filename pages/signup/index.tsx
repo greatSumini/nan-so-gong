@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import { Layout, Button, Input } from "@/components/common";
-import { words as constWords } from "@/constants";
-import { useRouter } from "next/router";
 
-function PasswordPhase({ onSubmit }: { onSubmit: () => void }) {
+import { words as constWords } from "@/constants";
+import { AuthService } from "@/services";
+
+function PasswordPhase({ onSubmit }: { onSubmit: (password: string) => void }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -15,7 +17,7 @@ function PasswordPhase({ onSubmit }: { onSubmit: () => void }) {
       return;
     }
 
-    onSubmit();
+    onSubmit(password);
   };
 
   return (
@@ -38,7 +40,11 @@ function PasswordPhase({ onSubmit }: { onSubmit: () => void }) {
   );
 }
 
-function ShowRecoveryPhrasePhase({ onComplete }: { onComplete: () => void }) {
+function ShowRecoveryPhrasePhase({
+  onComplete,
+}: {
+  onComplete: (phrase: string) => void;
+}) {
   const [words] = useState(
     constWords.sort(() => Math.random() - 0.5).slice(0, 16)
   );
@@ -56,7 +62,7 @@ function ShowRecoveryPhrasePhase({ onComplete }: { onComplete: () => void }) {
           <WordCard key={word}>{word}</WordCard>
         ))}
       </WordsWrapper>
-      <Button onClick={onComplete} width={360}>
+      <Button onClick={() => onComplete(words.join(" "))} width={360}>
         완료
       </Button>
     </>
@@ -67,21 +73,26 @@ const phases = ["password", "show"] as const;
 type Phase = typeof phases[number];
 export default function SignupPage() {
   const [phase, setPhase] = useState<Phase>("password");
+  const [password, setPassword] = useState("");
 
   const router = useRouter();
 
-  const moveToComplete = () => {
+  const signUp = (phrase: string) => {
+    AuthService.signUp(password, phrase);
     router.replace("/signup/complete");
   };
 
   return (
     <Layout>
       {phase === "password" && (
-        <PasswordPhase onSubmit={() => setPhase("show")} />
+        <PasswordPhase
+          onSubmit={(input) => {
+            setPassword(input);
+            setPhase("show");
+          }}
+        />
       )}
-      {phase === "show" && (
-        <ShowRecoveryPhrasePhase onComplete={moveToComplete} />
-      )}
+      {phase === "show" && <ShowRecoveryPhrasePhase onComplete={signUp} />}
     </Layout>
   );
 }
