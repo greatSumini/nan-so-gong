@@ -21,13 +21,17 @@ export default function HomePage() {
 }
 
 const Logo = styled.img`
+  position: absolute;
+  top: -12.4rem;
+
   margin-bottom: auto;
 
-  width: 20rem;
-  height: 15rem;
+  width: 50rem;
+  height: 33.6rem;
 `;
 
 const Title = styled.h1`
+  margin-top: 18rem;
   margin-bottom: 2.4rem;
 
   font-size: 3.2rem;

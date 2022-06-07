@@ -30,6 +30,7 @@ const Wrapper = styled.main<{
   flex-direction: column;
   align-items: center;
 
+  position: relative;
   width: ${(props) => rem(props.width)};
   height: ${(props) => rem(props.height)};
   padding: 3.2rem 2.4rem;
