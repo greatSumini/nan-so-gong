@@ -45,6 +45,7 @@ const Wrapper = styled.a<{ width?: number | string; size?: ButtonSize }>`
   font-weight: 700;
 
   cursor: pointer;
+  user-select: none;
 
   background-color: ${({ theme }) => theme.colors.gray7};
   transition: all 0.2s;

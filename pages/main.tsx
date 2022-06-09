@@ -62,9 +62,12 @@ const Title = styled.h1`
 `;
 
 const KeyText = styled.p`
+  margin-right: 0.8rem;
+
   font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.gray5};
-  margin-right: 0.8rem;
+
+  user-select: none;
 `;
 
 const KeyRow = styled.div`
@@ -92,6 +95,8 @@ const Avatar = styled.img`
   object-fit: cover;
 
   box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.08);
+
+  user-select: none;
 `;
 
 const Balance = styled.p`
