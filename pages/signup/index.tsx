@@ -78,8 +78,12 @@ export default function SignupPage() {
   const router = useRouter();
 
   const signUp = (phrase: string) => {
-    AuthService.signUp(password, phrase);
-    router.replace("/signup/complete");
+    try {
+      AuthService.signUp(password, phrase);
+      router.replace("/signup/complete");
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (

@@ -24,8 +24,12 @@ export default function RecoveryPage() {
       return;
     }
 
-    AuthService.recovery(phrase, password);
-    router.replace("/recovery/complete");
+    try {
+      AuthService.recovery(phrase, password);
+      router.replace("/recovery/complete");
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
