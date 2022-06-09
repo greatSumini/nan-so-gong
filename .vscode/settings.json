@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "components",
         "services",
-        "helpers"
+        "helpers",
+        "constants"
     ]
 }
