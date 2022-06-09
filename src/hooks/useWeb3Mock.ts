@@ -27,8 +27,13 @@ export const useWeb3Mock = () => {
     ]);
   };
 
+  const add = (type: string) => {
+    setWallets((prev) => [...prev, new Wallet({ type, name: type })]);
+  };
+
   return {
     wallets,
     send,
+    add,
   };
 };

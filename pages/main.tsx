@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { message } from "antd";
 
 import { Button, Layout, Tab } from "@/components/common";
-import { SendModal, WalletCard, TransactionCard } from "@/components/main";
+import {
+  SendModal,
+  WalletCard,
+  TransactionCard,
+  AddTokenModal,
+} from "@/components/main";
 import { CopyIcon } from "@/icons";
 
 import { useWeb3Mock } from "@/hooks";
@@ -22,7 +27,7 @@ export default function MainPage() {
     setModalState((prev) => ({ ...prev, [type]: !prev[type] }));
   };
 
-  const { wallets, send } = useWeb3Mock();
+  const { wallets, send, add } = useWeb3Mock();
 
   const [selected, setSelected] = useState(0);
   const wallet = wallets[selected];
@@ -48,7 +53,9 @@ export default function MainPage() {
           <Button size="small" onClick={toggleModal("send")}>
             보내기
           </Button>
-          <Button size="small">토큰 가져오기</Button>
+          <Button size="small" onClick={toggleModal("addToken")}>
+            토큰 가져오기
+          </Button>
         </ButtonRow>
         <Tab
           value={tab}
@@ -74,6 +81,13 @@ export default function MainPage() {
         onCancel={toggleModal("send")}
         onComplete={({ to, type, amount }) => {
           send(to, type, amount);
+        }}
+      />
+      <AddTokenModal
+        visible={modalState.addToken}
+        onCancel={toggleModal("addToken")}
+        onComplete={({ address, symbol, decimal }) => {
+          add(symbol);
         }}
       />
     </>
