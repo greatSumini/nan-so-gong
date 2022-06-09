@@ -6,6 +6,7 @@
         "constants",
         "icons",
         "pages",
-        "hooks"
+        "hooks",
+        "models"
     ]
 }
