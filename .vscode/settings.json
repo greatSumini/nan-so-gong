@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "components",
-        "services"
+        "services",
+        "helpers"
     ]
 }
