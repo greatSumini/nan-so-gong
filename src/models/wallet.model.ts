@@ -8,12 +8,14 @@ export type Transaction = {
 
 export class Wallet {
   address: string;
+  name: string;
   type: string;
   transactions: Transaction[];
 
-  constructor(type: string, startBalance?: number) {
+  constructor(config: { type: string; name: string }, startBalance?: number) {
     this.address = "lx28b-eaaczx28b-eaacnx28b-eaac";
-    this.type = type;
+    this.name = config.name;
+    this.type = config.type;
     this.transactions = [];
 
     if (startBalance > 0) {

@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import { Wallet } from "@/models";
 
 export const useWeb3Mock = () => {
-  const [wallets, setWallets] = useState<Wallet[]>([new Wallet("eth", 0.4264)]);
+  const [wallets, setWallets] = useState<Wallet[]>([
+    new Wallet({ type: "eth", name: "이더리움" }, 0.4264),
+  ]);
 
   const send = (to: string, type: string, amount: number) => {
     const index = wallets.findIndex((v) => v.type === type);
