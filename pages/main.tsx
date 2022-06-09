@@ -19,12 +19,14 @@ export default function MainPage() {
     <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
       <Title>내 지갑</Title>
       <KeyRow>
-        <KeyText>{account?.address.slice(0, 10) + " ..."}</KeyText>
+        <KeyText>{(account?.address.slice(0, 10) ?? "") + "..."}</KeyText>
         <CopyIcon />
       </KeyRow>
       <Avatar src="/images/ethereum.png" />
-      <Balance>{balance} ETH</Balance>
-      <UsdBalance>${balance * ETH_USD_EXCHANGE_RATE} USD</UsdBalance>
+      <Balance>{balance ?? "-"} ETH</Balance>
+      <UsdBalance>
+        ${balance != null ? balance * ETH_USD_EXCHANGE_RATE : "-"} USD
+      </UsdBalance>
       <ButtonRow>
         <Button size="small">보내기</Button>
         <Button size="small">토큰 가져오기</Button>
