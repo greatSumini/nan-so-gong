@@ -3,6 +3,7 @@
         "components",
         "services",
         "helpers",
-        "constants"
+        "constants",
+        "icons"
     ]
 }
