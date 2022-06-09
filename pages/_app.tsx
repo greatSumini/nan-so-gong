@@ -30,6 +30,15 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
   }
+
+  .ant-modal, .ant-modal-body {
+    width: fit-content !important;
+    height: fit-content !important;
+    border-radius: 0.8rem;
+  }
+  .ant-modal-close {
+    display: none;
+  }
 `;
 
 const theme = {

@@ -10,6 +10,8 @@ type InputProps = {
 
   className?: string;
   type?: HTMLInputTypeAttribute;
+  placeholder?: string;
+
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
@@ -18,7 +20,7 @@ export function Input(props: InputProps) {
   const { label, width, ...inputProps } = props;
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       {label != null && <LabelText>{label}</LabelText>}
       <StyledInput {...inputProps} />
     </Wrapper>
