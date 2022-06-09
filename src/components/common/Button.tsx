@@ -38,6 +38,7 @@ const Wrapper = styled.a<{ width?: number | string; size?: ButtonSize }>`
 
   width: ${(props) => rem(props.width) ?? "100%"};
   height: 6.4rem;
+  border-radius: 0.8rem;
 
   color: ${({ theme }) => theme.colors.gray1};
   font-size: 2.8rem;
@@ -57,7 +58,7 @@ const Wrapper = styled.a<{ width?: number | string; size?: ButtonSize }>`
     width: fit-content;
     height: fit-content;
     padding: 1.2rem 2.4rem;
-    
+
     font-size: 1.6rem;
   `}
 `;
