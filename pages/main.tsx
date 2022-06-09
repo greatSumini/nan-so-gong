@@ -4,28 +4,29 @@ import styled from "styled-components";
 import { Button, Layout, Tab } from "@/components/common";
 import { CopyIcon } from "@/icons";
 
-import { CookieKey } from "@/constants";
-import { getCookie } from "@/helpers";
-import { useWeb3 } from "@/hooks";
+import { useWeb3Mock } from "@/hooks";
 
 const ETH_USD_EXCHANGE_RATE = 1813.09;
 
 export default function MainPage() {
   const [tab, setTab] = useState<"asset" | "activity">("asset");
 
-  const { account, balance } = useWeb3(getCookie(CookieKey.PRIVATE_KEY));
+  const { wallets } = useWeb3Mock();
+
+  const [selected, setSelected] = useState(0);
+  const wallet = wallets[selected];
 
   return (
     <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
       <Title>내 지갑</Title>
       <KeyRow>
-        <KeyText>{(account?.address.slice(0, 10) ?? "") + "..."}</KeyText>
+        <KeyText>{wallet.address.slice(0, 10) + "..."}</KeyText>
         <CopyIcon />
       </KeyRow>
       <Avatar src="/images/ethereum.png" />
-      <Balance>{balance ?? "-"} ETH</Balance>
+      <Balance>{wallet.balance ?? "-"} ETH</Balance>
       <UsdBalance>
-        ${balance != null ? balance * ETH_USD_EXCHANGE_RATE : "-"} USD
+        ${(wallet.balance * ETH_USD_EXCHANGE_RATE).toFixed(2)} USD
       </UsdBalance>
       <ButtonRow>
         <Button size="small">보내기</Button>

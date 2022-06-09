@@ -7,10 +7,21 @@ export type Transaction = {
 };
 
 export class Wallet {
+  address: string;
+  type: string;
   transactions: Transaction[];
 
-  constructor(private readonly privateKey: string) {
+  constructor(type: string, startBalance?: number) {
+    this.address = "lx28b-eaaczx28b-eaacnx28b-eaac";
+    this.type = type;
     this.transactions = [];
+
+    if (startBalance > 0) {
+      this.addTransaction({
+        type: "receive",
+        amount: startBalance,
+      });
+    }
   }
 
   get balance(): number {
@@ -20,9 +31,10 @@ export class Wallet {
     );
   }
 
-  addTransaction(payload: Pick<Transaction, "hash" | "type" | "amount">) {
+  addTransaction(payload: Pick<Transaction, "type" | "amount">) {
     this.transactions.push({
       ...payload,
+      hash: Math.random().toString().slice(0, 20),
       resultbalance: this.balance + payload.amount,
       createdAt: new Date(),
     });

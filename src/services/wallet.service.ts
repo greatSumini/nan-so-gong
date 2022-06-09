@@ -18,7 +18,7 @@ class WalletService {
   }
 
   create(privateKey: string) {
-    wallets[privateKey] = new Wallet(privateKey);
+    // wallets[privateKey] = new Wallet();
   }
   receive(hash: string, amount: number, privateKey: string) {
     this.addTransaction({ hash, type: "receive", amount }, privateKey);
