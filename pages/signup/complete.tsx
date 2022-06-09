@@ -18,7 +18,7 @@ export default function SignupCompletePage() {
         - 피싱에 유의하세요
         <br />- 비밀 구문을 잘 보관하세요
       </Tip>
-      <Button href="/" width={288}>
+      <Button href="/main" width={288}>
         모두 완료
       </Button>
     </Layout>
