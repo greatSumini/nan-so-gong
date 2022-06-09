@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 import { rem } from "@/helpers";
 
+const buttonSizes = ["small", "medium"] as const;
+type ButtonSize = typeof buttonSizes[number];
+
 type ButtonProps = {
   /** @default '100%'' */
   width?: number | string;
@@ -11,6 +14,8 @@ type ButtonProps = {
   onClick?: () => void;
   href?: string;
   style?: CSSProperties;
+  /** @default 'medium' */
+  size?: ButtonSize;
 };
 
 export function Button({ href, ...props }: ButtonProps) {
@@ -25,7 +30,7 @@ export function Button({ href, ...props }: ButtonProps) {
   return <Wrapper {...props} />;
 }
 
-const Wrapper = styled.a<{ width?: number | string }>`
+const Wrapper = styled.a<{ width?: number | string; size?: ButtonSize }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,10 +39,9 @@ const Wrapper = styled.a<{ width?: number | string }>`
   width: ${(props) => rem(props.width) ?? "100%"};
   height: 6.4rem;
 
-  color; ${({ theme }) => theme.colors.gray1};
+  color: ${({ theme }) => theme.colors.gray1};
   font-size: 2.8rem;
   font-weight: 700;
-
 
   cursor: pointer;
 
@@ -46,4 +50,14 @@ const Wrapper = styled.a<{ width?: number | string }>`
   &: hover {
     background-color: #ddd;
   }
+
+  ${(props) =>
+    props.size === "small" &&
+    `
+    width: fit-content;
+    height: fit-content;
+    padding: 1.2rem 2.4rem;
+    
+    font-size: 1.6rem;
+  `}
 `;
