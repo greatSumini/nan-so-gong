@@ -49,7 +49,7 @@ const TabItem = styled.li<{ selected: boolean }>`
 
   font-size: 1.6rem;
   font-weight: 700;
-  font-color: ${({ selected, theme }) =>
+  color: ${({ selected, theme }) =>
     selected ? theme.colors.gray3 : theme.colors.gray5};
 
   cursor: pointer;
