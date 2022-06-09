@@ -1,4 +1,5 @@
 import { colors } from "@/constants";
+
 import { IconProps } from "./icons";
 
 export function CopyIcon({ fill = colors.gray5, style, ...props }: IconProps) {

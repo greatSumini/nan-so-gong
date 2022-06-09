@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Button, Layout, Tab } from "@/components/common";
-import { WalletCard } from "@/components/main";
+import { WalletCard, TransactionCard } from "@/components/main";
 import { CopyIcon } from "@/icons";
 
 import { useWeb3Mock } from "@/hooks";
@@ -45,6 +45,10 @@ export default function MainPage() {
         {tab === "asset" &&
           wallets.map((v) => (
             <WalletCard key={v.type} name={v.name} balance={v.balance} />
+          ))}
+        {tab === "activity" &&
+          wallet.transactions.map((v) => (
+            <TransactionCard key={v.type} {...v} />
           ))}
       </List>
     </Layout>
