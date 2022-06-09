@@ -61,9 +61,15 @@ const KeyRow = styled.div`
   flex-direction: row;
   align-items: center;
 
+  padding: 0 0.4rem;
   margin-bottom: 2.4rem;
 
   cursor: pointer;
+
+  transition: all 0.3s;
+  &: hover {
+    background-color: ${({ theme }) => theme.colors.gray8};
+  }
 `;
 
 const Avatar = styled.img`
