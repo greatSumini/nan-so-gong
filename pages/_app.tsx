@@ -11,6 +11,9 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
+  p, h1, h2, h3, ul {
+    margin: 0;
+  }
 
   html, body {
     width: 100vw;
@@ -19,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 
     font-size: 10px;
+    line-height: 1.4;
 
     background-color: ${colors.gray9};
 

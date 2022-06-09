@@ -25,10 +25,10 @@ export default function MainPage() {
   return (
     <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
       <Title>내 지갑</Title>
-      <KeyRow onClick={copyAddress}>
-        <KeyText>{wallet.address.slice(0, 10) + "..."}</KeyText>
+      <AddressRow onClick={copyAddress}>
+        <AddressText>{wallet.address.slice(0, 10) + "..."}</AddressText>
         <CopyIcon />
-      </KeyRow>
+      </AddressRow>
       <Avatar src="/images/ethereum.png" />
       <Balance>{wallet.balance ?? "-"} ETH</Balance>
       <UsdBalance>
@@ -66,7 +66,7 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.gray1};
 `;
 
-const KeyText = styled.p`
+const AddressText = styled.p`
   margin-right: 0.8rem;
 
   font-size: 1.2rem;
@@ -75,7 +75,7 @@ const KeyText = styled.p`
   user-select: none;
 `;
 
-const KeyRow = styled.div`
+const AddressRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
