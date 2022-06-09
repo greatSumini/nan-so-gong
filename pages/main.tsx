@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { message } from "antd";
 
 import { Button, Layout, Tab } from "@/components/common";
 import { WalletCard, TransactionCard } from "@/components/main";
@@ -17,10 +18,14 @@ export default function MainPage() {
   const [selected, setSelected] = useState(0);
   const wallet = wallets[selected];
 
+  const copyAddress = () => {
+    message.success("주소가 클립보드에 복사되었어요 😉");
+  };
+
   return (
     <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
       <Title>내 지갑</Title>
-      <KeyRow>
+      <KeyRow onClick={copyAddress}>
         <KeyText>{wallet.address.slice(0, 10) + "..."}</KeyText>
         <CopyIcon />
       </KeyRow>
