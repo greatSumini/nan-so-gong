@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import styled from "styled-components";
 
 import { rem } from "@/helpers";
@@ -10,12 +10,15 @@ type LayoutProps = {
   height?: number | string;
 
   children: ReactNode;
+
+  style?: CSSProperties;
 };
 
 export function Layout(props: LayoutProps) {
   const propsWithDefault: Required<LayoutProps> = {
     width: 640,
     height: 480,
+    style: {},
     ...props,
   };
 
