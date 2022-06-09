@@ -1,22 +1,30 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import { Button, Layout, Tab } from "@/components/common";
 import { CopyIcon } from "@/icons";
-import { useState } from "react";
+
+import { CookieKey } from "@/constants";
+import { getCookie } from "@/helpers";
+import { useWeb3 } from "@/hooks";
+
+const ETH_USD_EXCHANGE_RATE = 1813.09;
 
 export default function MainPage() {
   const [tab, setTab] = useState<"asset" | "activity">("asset");
+
+  const { account, balance } = useWeb3(getCookie(CookieKey.PRIVATE_KEY));
 
   return (
     <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
       <Title>내 지갑</Title>
       <KeyRow>
-        <KeyText>lx28b-eaac</KeyText>
+        <KeyText>{account?.address.slice(0, 10) + " ..."}</KeyText>
         <CopyIcon />
       </KeyRow>
       <Avatar src="/images/ethereum.png" />
-      <Balance>0.4264 ETH</Balance>
-      <UsdBalance>$98.22 USD</UsdBalance>
+      <Balance>{balance} ETH</Balance>
+      <UsdBalance>${balance * ETH_USD_EXCHANGE_RATE} USD</UsdBalance>
       <ButtonRow>
         <Button size="small">보내기</Button>
         <Button size="small">토큰 가져오기</Button>

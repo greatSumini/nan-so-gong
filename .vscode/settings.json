@@ -5,6 +5,7 @@
         "helpers",
         "constants",
         "icons",
-        "pages"
+        "pages",
+        "hooks"
     ]
 }
