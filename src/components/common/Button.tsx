@@ -51,6 +51,7 @@ const Wrapper = styled.a<{ width?: number | string; size?: ButtonSize }>`
   transition: all 0.2s;
   &: hover {
     background-color: #ddd;
+    color: ${({ theme }) => theme.colors.black};
   }
 
   ${(props) =>
