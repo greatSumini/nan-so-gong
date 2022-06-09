@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Button, Layout, Tab } from "@/components/common";
+import { WalletCard } from "@/components/main";
 import { CopyIcon } from "@/icons";
 
 import { useWeb3Mock } from "@/hooks";
@@ -40,6 +41,12 @@ export default function MainPage() {
           { label: "활동", value: "activity" },
         ]}
       />
+      <List>
+        {tab === "asset" &&
+          wallets.map((v) => (
+            <WalletCard key={v.type} name={v.name} balance={v.balance} />
+          ))}
+      </List>
     </Layout>
   );
 }
@@ -105,4 +112,14 @@ const ButtonRow = styled.div`
   gap: 1.6rem;
 
   margin-bottom: 3.2rem;
+`;
+
+const List = styled.ul`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 0;
+
+  list-style: none;
 `;
