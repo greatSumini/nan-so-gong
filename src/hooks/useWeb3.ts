@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Web3 from "web3";
-import { Account } from "web3-core";
+import { Account, WalletBase } from "web3-core";
+import { Accounts } from "web3-eth-accounts";
 
 const NETWORK_URL = "http://localhost:8515/";
 
@@ -8,6 +9,7 @@ export const useWeb3 = (privateKey: string) => {
   const web3 = useRef<Web3>();
 
   const [account, setAccout] = useState<Account>();
+  const [wallets, setWallets] = useState<WalletBase>();
   const [balance, setBalance] = useState<number>();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export const useWeb3 = (privateKey: string) => {
     }
 
     setAccout(web3.current.eth.accounts.privateKeyToAccount(privateKey));
+    setWallets(web3.current.eth.accounts.wallet);
   }, [privateKey]);
 
   useEffect(() => {
@@ -38,6 +41,10 @@ export const useWeb3 = (privateKey: string) => {
     })();
   }, [account]);
 
+  const createAccount = (): Account => {
+    return web3.current.eth.accounts.create();
+  };
+
   const signTransaction = async (to: string, value: number, gas: number) => {
     return await account.signTransaction({
       to,
@@ -49,6 +56,8 @@ export const useWeb3 = (privateKey: string) => {
   return {
     account,
     balance,
+    wallets,
+    createAccount,
     signTransaction,
   };
 };

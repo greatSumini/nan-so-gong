@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { message } from "antd";
 
@@ -11,13 +11,18 @@ import {
 } from "@/components/main";
 import { CopyIcon } from "@/icons";
 
-import { useWeb3Mock } from "@/hooks";
+import { CookieKey } from "@/constants";
+import { getCookie } from "@/helpers";
+import { useWeb3 } from "@/hooks";
+import { TransactionService } from "@/services";
+import { Transaction } from "@/models";
 
 const ETH_USD_EXCHANGE_RATE = 1813.09;
 
 type ModalType = "send" | "addToken";
 export default function MainPage() {
   const [tab, setTab] = useState<"asset" | "activity">("asset");
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const [modalState, setModalState] = useState<Record<ModalType, boolean>>({
     send: false,
@@ -27,13 +32,30 @@ export default function MainPage() {
     setModalState((prev) => ({ ...prev, [type]: !prev[type] }));
   };
 
-  const { wallets, send, add } = useWeb3Mock();
+  const { account, balance, signTransaction, wallets } = useWeb3(
+    getCookie(CookieKey.PRIVATE_KEY)
+  );
 
   const [selected, setSelected] = useState(0);
-  const wallet = wallets[selected];
+  const wallet = wallets?.length > selected ? wallets[selected] : null;
 
   const copyAddress = () => {
     message.success("주소가 클립보드에 복사되었어요 😉");
+  };
+
+  const balanceText = balance ?? "-";
+  const usdBalanceText =
+    balance != null ? (balance * ETH_USD_EXCHANGE_RATE).toFixed(2) : "-";
+
+  const send = (to: string, amount: number, gas: number) => {
+    signTransaction(to, amount, gas);
+
+    setTransactions(
+      TransactionService.add({
+        type: "send",
+        amount,
+      })
+    );
   };
 
   return (
@@ -41,14 +63,12 @@ export default function MainPage() {
       <Layout height={540} style={{ padding: "3.2rem 0 0 0" }}>
         <Title>내 지갑</Title>
         <AddressRow onClick={copyAddress}>
-          <AddressText>{wallet.address.slice(0, 10) + "..."}</AddressText>
+          <AddressText>{account?.address.slice(0, 10) + "..."}</AddressText>
           <CopyIcon />
         </AddressRow>
         <Avatar src="/images/ethereum.png" />
-        <Balance>{wallet.balance ?? "-"} ETH</Balance>
-        <UsdBalance>
-          ${(wallet.balance * ETH_USD_EXCHANGE_RATE).toFixed(2)} USD
-        </UsdBalance>
+        <Balance>{balanceText} ETH</Balance>
+        <UsdBalance>${usdBalanceText} USD</UsdBalance>
         <ButtonRow>
           <Button size="small" onClick={toggleModal("send")}>
             보내기
@@ -66,28 +86,23 @@ export default function MainPage() {
           ]}
         />
         <List>
-          {tab === "asset" &&
-            wallets.map((v) => (
-              <WalletCard key={v.type} name={v.name} balance={v.balance} />
-            ))}
+          {tab === "asset" && <WalletCard name="이더리움" balance={balance} />}
           {tab === "activity" &&
-            wallet.transactions.map((v) => (
-              <TransactionCard key={v.type} {...v} />
-            ))}
+            transactions.map((v) => <TransactionCard key={v.type} {...v} />)}
         </List>
       </Layout>
       <SendModal
         visible={modalState.send}
         onCancel={toggleModal("send")}
         onComplete={({ to, type, amount }) => {
-          send(to, type, amount);
+          send(to, amount, 0);
         }}
       />
       <AddTokenModal
         visible={modalState.addToken}
         onCancel={toggleModal("addToken")}
         onComplete={({ address, symbol, decimal }) => {
-          add(symbol);
+          // add(symbol);
         }}
       />
     </>
